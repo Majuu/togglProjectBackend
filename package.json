@@ -1,0 +1,27 @@
+{
+  "name": "toggl-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Majuu/togglProjectBackend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Majuu/togglProjectBackend/issues"
+  },
+  "homepage": "https://github.com/Majuu/togglProjectBackend#readme",
+  "dependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.18",
+    "express": "^4.16.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
+  }
+}
