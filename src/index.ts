@@ -1,17 +1,108 @@
+import 'dotenv/config';
 import App from './app';
 import PostsController from './posts/posts.controller';
+import {cleanEnv, port, str} from "envalid";
+// import validateEnv from './utils/validateEnv';
+
+// validateEnv();
+
+
+function validateEnv() {
+    cleanEnv(process.env, {
+        MONGO_PASSWORD: str(),
+        MONGO_PATH: str(),
+        MONGO_USER: str(),
+        PORT: port(),
+    });
+}
+validateEnv();
+
 
 const app = new App(
     [
         new PostsController(),
     ],
-    5000,
 );
 
 app.listen();
 
 
 
+
+
+
+
+
+
+
+
+
+
+// import * as mongoose from 'mongoose';
+// import 'dotenv/config';
+//
+// const {
+//     MONGO_USER,
+//     MONGO_PASSWORD,
+//     MONGO_PATH,
+// } = process.env;
+//
+// mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`);
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// WORKING CONTROLLERS
+// import App from './app';
+// import PostsController from './posts/posts.controller';
+// const app = new App(
+//     [
+//         new PostsController(),
+//     ],
+//     5000,
+// );
 
 // WORKING REQUEST
 // app.get('/', (request, response) => {
