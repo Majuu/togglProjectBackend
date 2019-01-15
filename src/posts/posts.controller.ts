@@ -1,10 +1,12 @@
 import * as express from 'express';
+import validationMiddleware from '../middleware/validation.middleware';
 import Controller from '../interfaces/controller.interface';
 import Post from './posts.interface';
 import postModel from './posts.model';
 import HttpException from "../exceptions/HttpException";
 import PostNotFoundException from "../exceptions/PostNotFoundException";
 // import { NextFunction } from 'express';
+import CreatePostDto from './post.dto';
 
 class PostsController implements Controller {
     public path = '/posts';
@@ -29,6 +31,8 @@ class PostsController implements Controller {
         this.router.put(`${this.path}/:id`, this.modifyPost);
         this.router.delete(`${this.path}/:id`, this.deletePost);
         this.router.post(this.path, this.createPost);
+        this.router.patch(`${this.path}/:id`, validationMiddleware(CreatePostDto, true), this.modifyPost);
+        this.router.post(this.path, validationMiddleware(CreatePostDto), this.createPost);
     }
 
     // getAllPosts = (request: express.Request, response: express.Response) => {
