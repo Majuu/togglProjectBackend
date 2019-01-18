@@ -2,19 +2,19 @@ import 'dotenv/config';
 import App from './app';
 import PostsController from './posts/posts.controller';
 import {cleanEnv, port, str} from "envalid";
-// import validateEnv from './utils/validateEnv';
+import validateEnv from './utils/validateEnv';
 
 // validateEnv();
 
 
-function validateEnv() {
-    cleanEnv(process.env, {
-        MONGO_PASSWORD: str(),
-        MONGO_PATH: str(),
-        MONGO_USER: str(),
-        PORT: port(),
-    });
-}
+// function validateEnv() {
+//     cleanEnv(process.env, {
+//         MONGO_PASSWORD: str(),
+//         MONGO_PATH: str(),
+//         MONGO_USER: str(),
+//         PORT: port(),
+//     });
+// }
 validateEnv();
 
 
