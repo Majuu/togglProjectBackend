@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import App from './app';
 import PostsController from './posts/posts.controller';
-import {cleanEnv, port, str} from "envalid";
+// import {cleanEnv, port, str} from "envalid";
 import validateEnv from './utils/validateEnv';
 
 // validateEnv();
@@ -25,15 +25,6 @@ const app = new App(
 );
 
 app.listen();
-
-
-
-
-
-
-
-
-
 
 
 

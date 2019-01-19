@@ -10,6 +10,7 @@ import userModel from './../users/user.model';
 import LogInDto from './logIn.dto';
 import TokenData from "../interfaces/tokenData.interface";
 import User from "../users/user.interface";
+import DataStoredInToken from "../interfaces/dataStoredInToken";
 
 class AuthenticationController implements Controller {
     public path = '/auth';
@@ -23,6 +24,7 @@ class AuthenticationController implements Controller {
     private initializeRoutes() {
         this.router.post(`${this.path}/register`, validationMiddleware(CreateUserDto), this.registration);
         this.router.post(`${this.path}/login`, validationMiddleware(LogInDto), this.loggingIn);
+        this.router.post(`${this.path}/logout`, this.loggingOut);
     };
 
     private registration = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
@@ -60,6 +62,11 @@ class AuthenticationController implements Controller {
         } else {
             next(new WrongCredentialsException());
         }
+    };
+
+    private loggingOut = (request: express.Request, response: express.Response) => {
+        response.setHeader('Set-Cookie', ['Authorization=;Max-age=0']);
+        response.send(200);
     };
 
     private createCookie(tokenData: TokenData) {
