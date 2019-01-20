@@ -15,14 +15,6 @@ class PostsController implements Controller {
     public router = express.Router();
     private post = postModel;
 
-    // private posts: Post[] = [
-    //     {
-    //         author: 'Artur',
-    //         content: 'Dolor sit amet',
-    //         title: 'Lorem Ipsum',
-    //     }
-    // ];
-
     constructor() {
         this.initializeRoutes();
     }
@@ -36,16 +28,6 @@ class PostsController implements Controller {
             .delete(`${this.path}/:id`, this.deletePost)
             .post(this.path, authMiddleware, validationMiddleware(CreatePostDto), this.createPost);
     }
-
-    // getAllPosts = (request: express.Request, response: express.Response) => {
-    //     response.send(this.posts);
-    // }
-
-    // createAPost = (request: express.Request, response: express.Response) => {
-    //     const post: Post = request.body;
-    //     this.posts.push(post);
-    //     response.send(post);
-    // }
 
     private getAllPosts = (request: express.Request, response: express.Response) => {
         this.post.find()
