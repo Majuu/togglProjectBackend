@@ -3,6 +3,7 @@ import App from './app';
 import PostsController from './posts/posts.controller';
 // import {cleanEnv, port, str} from "envalid";
 import validateEnv from './utils/validateEnv';
+import AuthenticationController from "./authentication/authentication.controller";
 
 // validateEnv();
 
@@ -21,6 +22,7 @@ validateEnv();
 const app = new App(
     [
         new PostsController(),
+        new AuthenticationController()
     ],
 );
 

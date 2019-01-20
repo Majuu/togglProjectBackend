@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt';
+// import * as bcrypt from 'bcrypt';
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 import UserWithThatEmailAlreadyExistsException from '../exceptions/UserWithThatEmailAlreadyExistsException';
@@ -29,15 +29,17 @@ class AuthenticationController implements Controller {
 
     private registration = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
         const userData: CreateUserDto = request.body;
+        console.log(request.body);
         if (
             await this.user.findOne({ email: userData.email })
         ) {
             next(new UserWithThatEmailAlreadyExistsException(userData.email));
         } else {
-            const hashedPassword = await bcrypt.hash(userData.password, 10);
+            // const hashedPassword = await bcrypt.hash(userData.password, 10);
             const user = await this.user.create({
                 ...userData,
-                password: hashedPassword,
+                // password: hashedPassword,
+                password: userData.password,
             });
             user.password = undefined;
             const tokenData = this.createToken(user);
@@ -50,8 +52,9 @@ class AuthenticationController implements Controller {
         const logInData: LogInDto = request.body;
         const user = await this.user.findOne({ email: logInData.email });
         if (user) {
-            const isPasswordMatching = await bcrypt.compare(logInData.password, user.password);
-            if (isPasswordMatching) {
+            // const isPasswordMatching = await bcrypt.compare(logInData.password, user.password);
+            // if (isPasswordMatching) {
+            if (true) {
                 user.password = undefined;
                 const tokenData = this.createToken(user);
                 response.setHeader('Set-Cookie', [this.createCookie(tokenData)]);

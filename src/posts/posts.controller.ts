@@ -11,7 +11,7 @@ import authMiddleware from "../middleware/auth.middleware";
 import RequestWithUser from "../interfaces/requestWithUser.interface";
 
 class PostsController implements Controller {
-    public path = '/posts';
+    public path = '/posts'; //tasks
     public router = express.Router();
     private post = postModel;
 
