@@ -11,6 +11,7 @@ import LogInDto from './logIn.dto';
 import TokenData from "../interfaces/tokenData.interface";
 import User from "../users/user.interface";
 import DataStoredInToken from "../interfaces/dataStoredInToken";
+import {compare} from "bcrypt";
 
 class AuthenticationController implements Controller {
     public path = '/auth';
@@ -31,7 +32,7 @@ class AuthenticationController implements Controller {
         const userData: CreateUserDto = request.body;
         console.log(request.body);
         if (
-            await this.user.findOne({ email: userData.email })
+            await this.user.findOne({email: userData.email})
         ) {
             next(new UserWithThatEmailAlreadyExistsException(userData.email));
         } else {
@@ -50,11 +51,9 @@ class AuthenticationController implements Controller {
 
     private loggingIn = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
         const logInData: LogInDto = request.body;
-        const user = await this.user.findOne({ email: logInData.email });
+        const user = await this.user.findOne({email: logInData.email});
         if (user) {
-            // const isPasswordMatching = await bcrypt.compare(logInData.password, user.password);
-            // if (isPasswordMatching) {
-            if (true) {
+            if (logInData.password == user.password) {
                 user.password = undefined;
                 const tokenData = this.createToken(user);
                 response.setHeader('Set-Cookie', [this.createCookie(tokenData)]);
@@ -65,6 +64,7 @@ class AuthenticationController implements Controller {
         } else {
             next(new WrongCredentialsException());
         }
+        console.log(request.body);
     };
 
     private loggingOut = (request: express.Request, response: express.Response) => {
@@ -84,7 +84,7 @@ class AuthenticationController implements Controller {
         };
         return {
             expiresIn,
-            token: jwt.sign(dataStoredInToken, secret, { expiresIn }),
+            token: jwt.sign(dataStoredInToken, secret, {expiresIn}),
         };
     };
 }
