@@ -2,7 +2,7 @@ import { IsOptional, IsString, ValidateNested } from 'class-validator';
 import CreateAddressDto from './address.dto';
 
 class CreateUserDto {
-    @IsString()
+    @IsOptional()
     public name: string;
 
     @IsString()
