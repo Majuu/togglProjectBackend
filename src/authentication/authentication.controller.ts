@@ -11,7 +11,8 @@ import LogInDto from './logIn.dto';
 import TokenData from "../interfaces/tokenData.interface";
 import User from "../users/user.interface";
 import DataStoredInToken from "../interfaces/dataStoredInToken";
-import {compare} from "bcrypt";
+import * as cors from "cors"
+
 
 class AuthenticationController implements Controller {
     public path = '/auth';
@@ -50,6 +51,10 @@ class AuthenticationController implements Controller {
     };
 
     private loggingIn = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
+
+
+
+
         const logInData: LogInDto = request.body;
         const user = await this.user.findOne({email: logInData.email});
         if (user) {

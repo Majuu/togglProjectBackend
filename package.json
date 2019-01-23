@@ -24,6 +24,7 @@
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "envalid": "^4.1.4",
     "express": "^4.16.4",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/cookie-parser": "^1.4.1",
+    "@types/cors": "^2.8.4",
     "@types/jsonwebtoken": "^8.3.0"
   }
 }
