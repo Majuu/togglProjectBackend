@@ -34,14 +34,12 @@ class App {
 
         this.app.use(function(req, res, next) {
             res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+            res.setHeader('Access-Control-Allow-Credentials', 'true');
             res.setHeader('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
             res.setHeader('Access-Control-Allow-Headers', '*');
             res.setHeader('Access-Control-Expose-Headers', '*');
 
-            // res.setHeader('Access-Control-Allow-Headers', '*');
 
-            // res.send('cors problem fixed:)');
-            // res.header('Access-Control-Allow-Headers', 'Content-Type');
             next();
         })
     }
