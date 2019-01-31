@@ -11,7 +11,7 @@ import authMiddleware from "../middleware/auth.middleware";
 import RequestWithUser from "../interfaces/requestWithUser.interface";
 
 class PostsController implements Controller {
-    public path = '/posts'; //tasks
+    public path = '/tasks'; //posts
     public router = express.Router();
     private post = postModel;
 
@@ -69,7 +69,7 @@ class PostsController implements Controller {
         });
         const savedPost = await createdPost.save();
         response.send(savedPost);
-    }
+    };
 
     private deletePost = (request: express.Request, response: express.Response, next: express.NextFunction) => {
         const id = request.params.id;

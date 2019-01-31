@@ -11,11 +11,10 @@ import LogInDto from './logIn.dto';
 import TokenData from "../interfaces/tokenData.interface";
 import User from "../users/user.interface";
 import DataStoredInToken from "../interfaces/dataStoredInToken";
-import * as cors from "cors"
 
 
 class AuthenticationController implements Controller {
-    public path = '/auth';
+    public path = '/auth'; // 'auth'
     public router = express.Router();
     private user = userModel;
 
@@ -45,15 +44,12 @@ class AuthenticationController implements Controller {
             });
             user.password = undefined;
             const tokenData = this.createToken(user);
-            response.setHeader('Set-Cookie', [this.createCookie(tokenData)]);
+            response.setHeader('Auth-Cookie', [this.createCookie(tokenData)]); // Set-Cookie
             response.send(user);
         }
     };
 
     private loggingIn = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
-
-
-
 
         const logInData: LogInDto = request.body;
         const user = await this.user.findOne({email: logInData.email});
@@ -61,7 +57,7 @@ class AuthenticationController implements Controller {
             if (logInData.password == user.password) {
                 user.password = undefined;
                 const tokenData = this.createToken(user);
-                response.setHeader('Set-Cookie', [this.createCookie(tokenData)]);
+                response.setHeader('Auth-Cookie', [this.createCookie(tokenData)]); // Set-Cookie
                 response.send(user);
             } else {
                 next(new WrongCredentialsException());
@@ -73,12 +69,12 @@ class AuthenticationController implements Controller {
     };
 
     private loggingOut = (request: express.Request, response: express.Response) => {
-        response.setHeader('Set-Cookie', ['Authorization=;Max-age=0']);
+        response.setHeader('Auth-Cookie', ['Authorization=;Max-age=0']); // Set-Cookie
         response.send(200);
     };
 
     private createCookie(tokenData: TokenData) {
-        return `Authorization=${tokenData.token}; httpOnly: false; Max-Age=${tokenData.expiresIn}`;
+        return `${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
     };
 
     private createToken(user: User): TokenData {

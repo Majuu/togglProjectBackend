@@ -1,14 +1,20 @@
 import { IsString } from 'class-validator';
 
 class CreatePostDto {
-    @IsString()
-    public author: string;
+    // @IsString()
+    // public author: string;
+    //
+    // @IsString()
+    // public content: string;
+    //
+    // @IsString()
+    // public title: string;
 
     @IsString()
-    public content: string;
+    public projectName: string;
 
     @IsString()
-    public title: string;
-}
+    public projectTime: string;
+    }
 
 export default CreatePostDto;

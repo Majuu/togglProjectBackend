@@ -34,10 +34,10 @@ class App {
 
         this.app.use(function(req, res, next) {
             res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-            res.setHeader('Access-Control-Allow-Credentials', 'true');
-            res.setHeader('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
+            res.setHeader('Access-Control-Allow-Methods','GET,PUT,POST,DELETE,OPTIONS');
             res.setHeader('Access-Control-Allow-Headers', '*');
             res.setHeader('Access-Control-Expose-Headers', '*');
+            res.setHeader('Access-Control-Allow-Credentials', 'true');
 
 
             next();
